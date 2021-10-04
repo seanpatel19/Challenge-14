@@ -1,34 +1,40 @@
 # Challenge-14
 
-## Venture Funding with Deep Learning
+## Algo Trading 
 
-The business team has given you a CSV file containing more than 34,000 organizations that have received funding from Alphabet Soup over the years. The CSV file contains a variety of information about each business, including whether or not it ultimately became successful. With your knowledge of machine learning and neural networks, you decide to use the features in the provided dataset to create a binary classifier model that will predict whether an applicant will become a successful business.
+We are financial advisors working for a top five financial advisory firm. We are planning on improving our trading algorithms by using different types of machine learning.   
 
-Step 1: Read the applicants_data.csv file into a Pandas DataFrame. Review the DataFrame, looking for categorical variables that will need to be encoded, as well as columns that could eventually define your features and target variables. 
+Step 1: Import the OHLCV dataset into a Pandas DataFrame.
 
-Step 2: Drop the “EIN” (Employer Identification Number) and “NAME” columns from the DataFrame, because they are not relevant to the binary classification model.
+Step 2: Generate trading signals using short- and long-window SMA values.
 
-Step 3: Encode the dataset’s categorical variables using OneHotEncoder, and then place the encoded variables into a new DataFrame.
+Step 3: Split the data into training and testing datasets.
 
-Step 4: Add the original DataFrame’s numerical variables to the DataFrame containing the encoded variables.
+Step 4: Use the SVC classifier model from SKLearn's support vector machine (SVM) learning method to fit the training data and make predictions based on the testing data. Review the predictions.
 
-Step 5: Using the preprocessed data, create the features (X) and target (y) datasets. The target dataset should be defined by the preprocessed DataFrame column “IS_SUCCESSFUL”. The remaining columns should define the features dataset.
+Step 5: Review the classification report associated with the SVC model predictions.
 
-Step 6: Split the features and target sets into training and testing datasets.
+Step 6: Create a predictions DataFrame that contains columns for “Predicted” values, “Actual Returns”, and “Strategy Returns”.
 
-Step 7: Use scikit-learn's StandardScaler to scale the features data.
+Step 7: Create a cumulative return plot that shows the actual returns vs. the strategy returns. Save a PNG image of this plot. This will serve as a baseline against which to compare the effects of tuning the trading algorithm.
 
-Step 8: Create a deep neural network by assigning the number of input features, the number of layers, and the number of neurons on each layer using Tensorflow’s Keras.
+Step 8: Write your conclusions about the performance of the baseline trading algorithm in the README.md file that’s associated with your GitHub repository. Support your findings by using the PNG image that you saved in the previous step.
 
-Step 9: Compile and fit the model using the binary_crossentropy loss function, the adam optimizer, and the accuracy evaluation metric.
+## Tuning the Model
 
-Step 10: Evaluate the model using the test data to determine the model’s loss and accuracy.
+Step 1: Tune the training algorithm by adjusting the size of the training dataset. To do so, slice your data into different periods. Rerun the notebook with the updated parameters, and record the results in your README.md file. Answer the following question: What impact resulted from increasing or decreasing the training window?
 
-Step 11: Save and export your model to an HDF5 file, and name the file AlphabetSoup.h5.
- 
-Step 12: Repeat the above with different imputs to make the model better 
+Step 2:  Tune the trading algorithm by adjusting the SMA input features. Adjust one or both of the windows for the algorithm. Rerun the notebook with the updated parameters, and record the results in your README.md file. Answer the following question: What impact resulted from increasing or decreasing either or both of the SMA windows?
 
+Step 3: Choose the set of parameters that best improved the trading algorithm returns. Save a PNG image of the cumulative product of the actual returns vs. the strategy returns, and document your conclusion in your README.md file.
 
+## Evaluating a new model 
+
+Step 1: Import a new classifier, such as AdaBoost, DecisionTreeClassifier, or LogisticRegression. (For the full list of classifiers, refer to the Supervised learning page (Links to an external site.) in the scikit-learn documentation.)
+
+Step 2: Using the original training data as the baseline model, fit another model with the new classifier.
+
+Step 3: Backtest the new model to evaluate its performance. Save a PNG image of the cumulative product of the actual returns vs. the strategy returns for this updated trading algorithm, and write your conclusions in your README.md file. Answer the following questions: Did this new model perform better or worse than the provided baseline model? Did this new model perform better or worse than your tuned trading algorithm?
 
 
 ---
@@ -38,13 +44,17 @@ This application is written in Python 3.7
 
 this application uses the following packages:
 
-Pandas 
+Pandas  https://pandas.pydata.org
 
-Pathlib
+Pathlib https://docs.python.org/3/library/pathlib.html
 
-Tensorflow
+Numpy https://numpy.org
 
-Sklearn
+Hvplot https://hvplot.holoviz.org/index.html
+
+Matplotlib https://matplotlib.org
+
+Sklearn https://scikit-learn.org/stable/index.html
 
 ---
 
@@ -53,26 +63,66 @@ Sklearn
 Before running the application first install the following dependencies.
 See the associated Screenshot for what to Install 
 
-![imports](https://github.com/seanpatel19/Challenge-13/blob/74b2e77213ce6b0059e8969e7c92c9712360d38a/Images/installs.jpg)
+![imports](https://github.com/seanpatel19/Challenge-14/blob/04817cff05989aea7629b9be2d8c92ca377a00ef/Images/imports%20.jpg)
 
 
 
 
 ---
 
-## Examples
+## Evaluation Report
 
-Please see the following images of the code 
+During our evaluation of the current model the following imputs were used.
 
-This is the code for compiling the model
+The first time frame looked at was 3 months.
 
-![target balance](https://github.com/seanpatel19/Challenge-13/blob/74b2e77213ce6b0059e8969e7c92c9712360d38a/Images/nn%20code%20.jpg)
+![original time sample](https://github.com/seanpatel19/Challenge-14/blob/04817cff05989aea7629b9be2d8c92ca377a00ef/Images/time%20sample%20original.png)
+
+The first set of moving averages looked at where 4 days and 100 days 
+![original SMAs](https://github.com/seanpatel19/Challenge-14/blob/04817cff05989aea7629b9be2d8c92ca377a00ef/Images/SMA%20original.png)
+
+The original classification report shows that the model should be useful with a weighted average of 77 and very high recall and precision in longing and shorting respectively
+
+![original classification report](https://github.com/seanpatel19/Challenge-14/blob/04817cff05989aea7629b9be2d8c92ca377a00ef/Images/original%20classification%20report%20.png)
+
+While the numbers seem good the performance of this strategy is not desirable as it underperforms 
+
+![original returns graph](https://github.com/seanpatel19/Challenge-14/blob/ed60de7fdd7d8a0fb77104fb66908e4b54ba3b89/Images/plotted%20returns.png)
+
+I set out to tune the model to find some better performance.
+
+One of the things I did was to increase the time horizon that was used for testing, from 3 months to 6 months.
+
+This was coupled with adjusting the moving averages used as trading signals. We decided on using a shorter SMA horizon with 14 days being our "Fast" SMA and 30 being our "Slow" SMA 
+
+These changes together produced this classification report which on the surface looks worse than the original classification report with a whole 20 points lower on weighted average and much worse recall and precision.
+
+![new classification report](https://github.com/seanpatel19/Challenge-14/blob/ed60de7fdd7d8a0fb77104fb66908e4b54ba3b89/Images/New%20classifciation%20report.png)
+
+Despite this the returns were much better and outperformed. As this new model outperformed on nearly all times frames, I believe that changing the moving averages had a greater effect than increasing the time period that we looked at originally  
+
+![new plotted returns](https://github.com/seanpatel19/Challenge-14/blob/ed60de7fdd7d8a0fb77104fb66908e4b54ba3b89/Images/new%20plotted%20returns.png)
+
+Another model was used on the original time frame and original moving averages to see if more performance could be gained. I used Logisitic Regression to see if that created any improvements. 
+
+While the classification report showed a lower weighted average than the previous model with time frame changes, we have seen that better weighted average does not guarantee better trading results 
+
+![logisitic regression classfication report](https://github.com/seanpatel19/Challenge-14/blob/ed60de7fdd7d8a0fb77104fb66908e4b54ba3b89/Images/lr%20classifcation%20report.png)
+
+But this model is no good. It lags actual returns to such an extent, I am of the opinion that logistic regression is not suitable for a trading algorithms
+
+![lr returns plotted ](https://github.com/seanpatel19/Challenge-14/blob/ed60de7fdd7d8a0fb77104fb66908e4b54ba3b89/Images/new%20model%20graph.png)
 
 
+### Conclusions 
 
-The results of the 3 models as it can be seen this is not a very successful model
-![target balance](https://github.com/seanpatel19/Challenge-13/blob/74b2e77213ce6b0059e8969e7c92c9712360d38a/Images/model%20results.jpg)
+I would appear that Support Vector Machine (SVM) learning is suitable for putting together a trading strategy. 
 
+The updated model appears to work well enough, that it should be fitted to other assets to see what sort of performance gains could be found. 
+
+It would also be useful to look at the returns of the model over a very long time horizon to see how well it does. 
+
+During a 6 month timeframe the new 14 and 30 SMA SVM is a winning trading algo.
 
 
 ---
