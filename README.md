@@ -1,61 +1,41 @@
 # Challenge-14
 
-## Block Chain Ledger  
+## Algo Trading 
 
-We are Fintech Engineers at a top 5 bank. Our task is to build a blockchain-based ledger system, complete with a user-friendly web interface. This ledger should allow partner banks to conduct financial transactions (that is, to transfer money between senders and receivers) and to verify the integrity of the data in the ledger.
+We are financial advisors working for a top five financial advisory firm. We are planning on improving our trading algorithms by using different types of machine learning.   
 
-To accomplish this we need to do the following:
+Step 1: Import the OHLCV dataset into a Pandas DataFrame.
 
-Step 1: Create a Record Data Class
+Step 2: Generate trading signals using short- and long-window SMA values.
 
-Step 2: Modify the Existing Block Data Class to Store Record Data
+Step 3: Split the data into training and testing datasets.
 
-Step 3: Add Relevant User Inputs to the Streamlit Interface
+Step 4: Use the SVC classifier model from SKLearn's support vector machine (SVM) learning method to fit the training data and make predictions based on the testing data. Review the predictions.
 
-Step 4: Test the PyChain Ledger by Storing Records
+Step 5: Review the classification report associated with the SVC model predictions.
 
+Step 6: Create a predictions DataFrame that contains columns for “Predicted” values, “Actual Returns”, and “Strategy Returns”.
 
-## Create a Record Data Class
+Step 7: Create a cumulative return plot that shows the actual returns vs. the strategy returns. Save a PNG image of this plot. This will serve as a baseline against which to compare the effects of tuning the trading algorithm.
 
-Step 1: Define a new class named Record.
+Step 8: Write your conclusions about the performance of the baseline trading algorithm in the README.md file that’s associated with your GitHub repository. Support your findings by using the PNG image that you saved in the previous step.
 
-Step 2: Add the @dataclass decorator immediately before the Record class definition.
+## Tuning the Model
 
-Step 3: Add an attribute named sender of type str.
+Step 1: Tune the training algorithm by adjusting the size of the training dataset. To do so, slice your data into different periods. Rerun the notebook with the updated parameters, and record the results in your README.md file. Answer the following question: What impact resulted from increasing or decreasing the training window?
 
-Step 4: Add an attribute named receiver of type str.
+Step 2:  Tune the trading algorithm by adjusting the SMA input features. Adjust one or both of the windows for the algorithm. Rerun the notebook with the updated parameters, and record the results in your README.md file. Answer the following question: What impact resulted from increasing or decreasing either or both of the SMA windows?
 
-Step 5: Add an attribute named amount of type float.
+Step 3: Choose the set of parameters that best improved the trading algorithm returns. Save a PNG image of the cumulative product of the actual returns vs. the strategy returns, and document your conclusion in your README.md file.
 
-## Modify the Existing Block Data Class to Store Record Data
+## Evaluating a new model 
 
-Step 1: In the Block class, rename the data attribute to record.
+Step 1: Import a new classifier, such as AdaBoost, DecisionTreeClassifier, or LogisticRegression. (For the full list of classifiers, refer to the Supervised learning page (Links to an external site.) in the scikit-learn documentation.)
 
-Step 2: Set the data type of the record attribute to Record.
+Step 2: Using the original training data as the baseline model, fit another model with the new classifier.
 
-## Add Relevant User Inputs to the Streamlit Interface
+Step 3: Backtest the new model to evaluate its performance. Save a PNG image of the cumulative product of the actual returns vs. the strategy returns for this updated trading algorithm, and write your conclusions in your README.md file. Answer the following questions: Did this new model perform better or worse than the provided baseline model? Did this new model perform better or worse than your tuned trading algorithm?
 
-Step 1: Delete the input_data variable from the Streamlit interface.
-
-Step 2: Add an input area where you can get a value for sender from the user.
-
-Step 3: Add an input area where you can get a value for receiver from the user.
-
-Step 4: Add an input area where you can get a value for amount from the user.
-
-Step 5: As part of the Add Block button functionality, update new_block so that Block consists of an attribute named record, which is set equal to a Record that contains the sender, receiver, and amount values. The updated Blockshould also include the attributes for creator_id and prev_hash.
-
-## Test the PyChain Ledger by Storing Records
-
-Step 1: In the terminal, navigate to the project folder where you've coded the Challenge.
-
-Step 2: In the terminal, run the Streamlit application by using streamlit run pychain.py.
-
-Step 3: Enter values for the sender, receiver, and amount, and then click the Add Block button. Do this several times to store several blocks in the ledger.
-
-Step 4: Verify the block contents and hashes in the Streamlit drop-down menu. Take a screenshot of the Streamlit application page, which should detail a blockchain that consists of multiple blocks. Include the screenshot in the README.md file for your Challenge repository.
-
-Step 5: Test the blockchain validation process by using the web interface. Take a screenshot of the Streamlit application page, which should indicate the validity of the blockchain. Include the screenshot in the README.md file for your Challenge repository.
 
 ---
 
